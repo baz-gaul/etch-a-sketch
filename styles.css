@@ -28,6 +28,7 @@ body{
 .cell{
     display: block;
     border: 1px solid black;
+    background-color: white;
 }
 img{
     width: 20px;
