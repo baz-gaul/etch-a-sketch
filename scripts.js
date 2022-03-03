@@ -2,6 +2,7 @@ const grid = document.getElementById('grid');
 const resetButton = document.getElementById('reset');
 const color = document.getElementById('colorInput');
 const range = document.getElementById('range');
+const random = document.getElementById('random');
 
 function resizeGrid(){
     // remove all current cells
@@ -18,7 +19,12 @@ function resizeGrid(){
     //add Event Listeners to cells, changes their padding to % of parent
     grid.childNodes.forEach(div => {
         div.addEventListener('mouseover', (e) => {
+            if(random.checked === false){
             e.target.style.backgroundColor = color.value;
+            }else{
+                const rgbGen = () => Math.floor(Math.random() * 255);
+                e.target.style.backgroundColor = `rgb(${rgbGen()}, ${rgbGen()}, ${rgbGen()})`;
+            }
         });
 
     });
