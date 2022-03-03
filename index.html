@@ -1,17 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script src="scripts.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
-   </head>
-
-<!-- The DOM -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etch A Sketch</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+</head>
 <body>
-    <h1>
-      Etch-A-Sketch
-    </h1>
-    <button id="resetGrid">Reset Grid</button>
-    <input type="color" id="selectedColor" name="selectedColor">
-    <button id="resizeGrid">Resize Grid</button>
-    <div id="grid">
-
-    </div>
-  </body>
+  <h1>Etch a Sketch</h1>
+  <div id="buttonRow">
+    <input type="color" id="colorInput">
+    <button id="reset">reset</button>
+    <input type="range" min="4" max="20" value="16" class="slider" id="range">
+  </div>
+  <div id="grid"></div>
+  <div id="footer">
+    KarsLark
+    <img src="gh.png">
+  </div>
+</body>
+</html>

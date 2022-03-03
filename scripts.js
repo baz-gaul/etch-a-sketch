@@ -1,27 +1,35 @@
-function createGrid(size){
-    const divs = [];
-    for(let i = 0; i < size * size; i++){
-        divs.push(document.createElement('div'));
+const grid = document.getElementById('grid');
+const resetButton = document.getElementById('reset');
+const color = document.getElementById('colorInput');
+const range = document.getElementById('range');
+
+function resizeGrid(){
+    // remove all current cells
+    Array.from(grid.childNodes).forEach(x => x.remove());
+    // have to use Array.from or it glitches because childNodes is a live
+    const size = range.value;
+    // create new cells
+    for(let i = 0; i < Math.pow(size, 2); i++){
+        const div = document.createElement('cell');
+        div.style.backgroundColor = "white";
+        grid.appendChild(div);
     }
 
-    divs.forEach(div => div.classList.add('cell'));
-    divs.forEach(div => div.innerText = "test");
-    return divs;
+    //add Event Listeners to cells, changes their padding to % of parent
+    grid.childNodes.forEach(div => {
+        div.addEventListener('mouseover', (e) => {
+            e.target.style.backgroundColor = color.value;
+        });
+
+    });
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 }
 
-function removeGrid(grid){
-    return Array.from(grid.childNodes).map(cell => cell.remove());
-    // return for debugging purposes
+function resetGridColor(){
+    grid.childNodes.forEach(node => node.style.backgroundColor = "white");
 }
 
-const grid = document.querySelector('#grid');
-
-// input setup
-document.querySelector('#resetGrid').addEventListener('click', () => {
-    removeGrid(grid);
-})
-document.querySelector('#resizeGrid').addEventListener('click', () => {
-    removeGrid(grid);
-    grid.append(...createGrid(16));
-})
-grid.append(...createGrid(16));
+resetButton.addEventListener('click', resetGridColor);
+range.addEventListener('change', resizeGrid);
+resizeGrid();
