@@ -4,11 +4,15 @@ const color = document.getElementById('colorInput');
 const range = document.getElementById('range');
 const random = document.getElementById('random');
 
-function resizeGrid(){
-    // remove all current cells
+function clearGrid(){
     Array.from(grid.childNodes).forEach(x => x.remove());
-    // have to use Array.from or it glitches because childNodes is a live
+}
+
+function resizeGrid(){
     const size = range.value;
+    // remove all current cells
+    clearGrid();
+    // have to use Array.from or it glitches because childNodes is a live
     // create new cells
     for(let i = 0; i < Math.pow(size, 2); i++){
         const div = document.createElement('cell');
@@ -16,7 +20,8 @@ function resizeGrid(){
         grid.appendChild(div);
     }
 
-    //add Event Listeners to cells, changes their padding to % of parent
+    //add Event Listeners to cells
+
     grid.childNodes.forEach(div => {
         div.addEventListener('mouseover', (e) => {
             if(random.checked === false){
@@ -26,10 +31,9 @@ function resizeGrid(){
                 e.target.style.backgroundColor = `rgb(${rgbGen()}, ${rgbGen()}, ${rgbGen()})`;
             }
         });
-
     });
+    // change grid to accomodate cells
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 }
 
 function resetGridColor(){
